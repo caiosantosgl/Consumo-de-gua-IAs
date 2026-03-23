@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dia Mundial da Água | Impacto da IA no Consumo Hídrico</title>
+  <title>Dia Mundial da Água | Impacto da IA</title>
   <meta
     name="description"
-    content="Site interativo para apresentação escolar sobre o impacto do uso de inteligência artificial no consumo de água."
+    content="Projeto escolar interativo sobre o impacto do uso de inteligência artificial no consumo de água."
   />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -25,25 +25,23 @@
     <nav class="tabs">
       <button class="tab-btn active" data-tab="cronometro">⏱️ Cronômetro</button>
       <button class="tab-btn" data-tab="simulacao">🧪 Simulação</button>
-      <button class="tab-btn" data-tab="dados">📊 Dados</button>
-      <button class="tab-btn" data-tab="fontes">📚 Fontes</button>
     </nav>
 
     <section id="cronometro" class="tab-panel active">
-      <div class="card timer-wrap">
-        <div class="timer-display">
+      <div class="card timer-wrap" id="timerCard">
+        <div class="timer-display" id="timerDisplayBox">
           <div class="label">Tempo em apresentação</div>
           <div class="time" id="timeDisplay">00:00:00</div>
         </div>
 
-        <div class="controls">
+        <div class="controls" id="controlsBox">
           <button class="btn btn-start" id="startBtn">▶ Iniciar</button>
           <button class="btn btn-pause" id="pauseBtn">⏸ Pausar</button>
           <button class="btn btn-reset" id="resetBtn">🔁 Zerar</button>
           <button class="btn btn-full" id="fullscreenBtn">⛶ Tela Cheia</button>
         </div>
 
-        <div class="stats-grid">
+        <div class="stats-grid" id="statsGrid">
           <div class="stat-box">
             <div class="stat-title">Tempo decorrido</div>
             <div class="stat-value" id="elapsedSeconds">0s</div>
@@ -55,61 +53,45 @@
             <div class="stat-value" id="interactionsValue">0</div>
             <div class="stat-sub" id="liveRateLabel">simulação: 35 interações/seg</div>
           </div>
-
-          <div class="stat-box">
-            <div class="stat-title">Água mínima</div>
-            <div class="stat-value" id="waterMinLiters">0 L</div>
-            <div class="stat-sub">10 ml por interação</div>
-          </div>
-
-          <div class="stat-box">
-            <div class="stat-title">Água máxima</div>
-            <div class="stat-value" id="waterMaxLiters">0 L</div>
-            <div class="stat-sub">25 ml por interação</div>
-          </div>
         </div>
 
-        <div class="range-grid">
+        <div class="range-grid" id="rangeGrid">
           <div class="range-box">
-            <h3>Água consumida <br />(mínimo)</h3>
+            <h3>Água consumida <br>(mínimo)</h3>
             <div class="big" id="waterMinMl">0 ml</div>
-            <p>cenário de 500 ml a cada 50 interações</p>
+            <p id="waterMinLiters">0 L</p>
           </div>
 
           <div class="range-box max">
-            <h3>Água consumida <br />(máximo)</h3>
+            <h3>Água consumida <br>(máximo)</h3>
             <div class="big" id="waterMaxMl">0 ml</div>
-            <p>cenário de 500 ml a cada 20 interações</p>
+            <p id="waterMaxLiters">0 L</p>
           </div>
         </div>
 
-        <div class="equiv-grid">
+        <div class="equiv-grid" id="equivGrid">
           <div class="equiv-card">
             <div class="equiv-icon">🍼</div>
             <div class="equiv-value" id="bottlesValue">0</div>
-            <div class="equiv-label">Garrafas de 500 ml</div>
-            <div class="equiv-sub">baseado no consumo máximo</div>
+            <div class="equiv-label">Garrafas 500 ml</div>
           </div>
 
           <div class="equiv-card">
             <div class="equiv-icon">🪣</div>
             <div class="equiv-value" id="bucketsValue">0</div>
-            <div class="equiv-label">Baldes de 10 L</div>
-            <div class="equiv-sub">equivalência visual</div>
+            <div class="equiv-label">Baldes 10 L</div>
           </div>
 
           <div class="equiv-card">
             <div class="equiv-icon">🥤</div>
             <div class="equiv-value" id="cupsValue">0</div>
-            <div class="equiv-label">Copos de 250 ml</div>
-            <div class="equiv-sub">equivalência visual</div>
+            <div class="equiv-label">Copos 250 ml</div>
           </div>
 
           <div class="equiv-card">
             <div class="equiv-icon">🏊</div>
             <div class="equiv-value" id="poolsValue">0</div>
             <div class="equiv-label">Piscinas olímpicas</div>
-            <div class="equiv-sub">1 piscina ≈ 2.500.000 L</div>
           </div>
         </div>
       </div>
@@ -147,8 +129,9 @@
           <button class="calc-btn" id="calcBtn">Calcular impacto</button>
 
           <p class="mini-note">
-            A faixa de consumo de água segue a UFSM: <strong>500 ml a cada 20 a 50 interações</strong>.
-            A taxa de interações por segundo é uma <strong>simulação visual</strong> para a apresentação.
+            A faixa de consumo de água segue a UFSM:
+            <strong>500 ml a cada 20 a 50 interações</strong>.
+            A taxa por segundo é uma <strong>simulação visual</strong> para a apresentação.
           </p>
         </div>
 
@@ -185,55 +168,8 @@
         </div>
       </div>
     </section>
-
-    <section id="dados" class="tab-panel">
-      <div class="card">
-        <div class="chart-wrap">
-          <div class="chart-title">Consumo de água relacionado à IA</div>
-          <div class="chart-sub">
-            Comparação visual com base em dados citados pela UFSM e em pesquisa acadêmica sobre a pegada hídrica da IA.
-          </div>
-          <canvas id="impactChart" width="1000" height="480"></canvas>
-        </div>
-
-        <div class="facts-grid">
-          <div class="fact-card">
-            <h3>Treinamento do GPT-3</h3>
-            <div class="fact-number">700 mil L</div>
-            <p>Estimativa de água potável consumida durante o treinamento completo do modelo.</p>
-          </div>
-
-          <div class="fact-card">
-            <h3>UFSM</h3>
-            <div class="fact-number">500 ml</div>
-            <p>Faixa aproximada a cada 20 a 50 interações de uso pessoal com IA.</p>
-          </div>
-
-          <div class="fact-card">
-            <h3>Escala diária</h3>
-            <div class="fact-number">+ 1 bi</div>
-            <p>O texto da UFSM cita mais de 1 bilhão de interações por dia em escala global.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="fontes" class="tab-panel">
-      <div class="card source-box">
-        <p><strong>Base principal:</strong> UFSM — “Como o uso de inteligências artificiais consome água?”</p>
-        <p><strong>Dado central usado no site:</strong> aproximadamente 500 ml a cada 20 a 50 interações.</p>
-        <p><strong>Interpretação adotada no projeto:</strong> 10 ml por interação no cenário mínimo e 25 ml por interação no cenário máximo.</p>
-        <p><strong>Observação:</strong> a taxa de “interações por segundo” do cronômetro é apenas uma simulação para apresentação, não um dado oficial da UFSM.</p>
-        <p><strong>Mensagem da apresentação:</strong> “Todo avanço tem seu custo. A IA facilita nossa vida, mas o meio ambiente pode pagar caro por isso.”</p>
-      </div>
-
-      <div class="card footer-card">
-        💧 Todo avanço tem seu custo
-        <small>Dia Mundial da Água • apresentação escolar sobre tecnologia e responsabilidade ambiental</small>
-      </div>
-    </section>
   </main>
 
   <script src="script.js"></script>
 </body>
-</html> 
+</html>
